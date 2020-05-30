@@ -6,7 +6,6 @@ resource "kubernetes_daemonset" "deploy" {
   }
   spec {
     min_ready_seconds = var.min_ready_seconds
-    replicas = var.replicas
     selector {
       match_labels = local.labels
     }

@@ -102,11 +102,6 @@ variable "restart_policy" {
   description = "Restart policy for all containers within the pod. One of Always, OnFailure, Never"
   default = "Always"
 }
-variable "replicas" {
-  type = number
-  description = "(Optional) Count of pods"
-  default = 1
-}
 variable "min_ready_seconds" {
   type = number
   description = "(Optional) Field that specifies the minimum number of seconds for which a newly created Pod should be ready without any of its containers crashing, for it to be considered available  "
