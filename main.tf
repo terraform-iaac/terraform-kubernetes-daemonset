@@ -45,7 +45,7 @@ resource "kubernetes_daemonset" "deploy" {
               name = env.value.name
               value_from {
                 field_ref {
-                  field_path = env.value.value
+                  field_path = env.value.field_path
                 }
               }
             }
