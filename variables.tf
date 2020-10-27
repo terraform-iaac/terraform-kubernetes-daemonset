@@ -47,6 +47,11 @@ variable "env_field" {
   description = "(Optional) Get field from k8s and add as environment variables to pods"
   default = []
 }
+variable "env_secret" {
+  description = "(Optional) Get secret keys from k8s and add as environment variables to pods"
+  type        = list(object({name = string, secret_name = string, secret_key = string}))
+  default     = []
+}
 variable "hosts" {
   type = list(object({hostname = string, ip = string}))
   description = "(Optional) Add /etc/hosts records to pods"
