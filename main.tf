@@ -18,7 +18,10 @@ resource "kubernetes_daemonset" "this" {
         labels = local.labels
       }
 
+
       spec {
+        restart_policy = var.restart_policy
+
         service_account_name            = var.service_account_name
         automount_service_account_token = var.service_account_token
 
@@ -137,14 +140,11 @@ resource "kubernetes_daemonset" "this" {
           command           = var.command
           image_pull_policy = var.image_pull_policy
           tty               = var.tty
-          restart_policy    = var.restart_policy
 
-          security_context {
-            dynamic "security_context" {
-              for_each = var.security_context
-              content {
-                read_only_root_filesystem = lookup(security_context.value, "read_only_root_filesystem", null)
-              }
+          dynamic "security_context" {
+            for_each = var.security_context
+            content {
+              read_only_root_filesystem = lookup(security_context.value, "read_only_root_filesystem", null)
             }
           }
 
