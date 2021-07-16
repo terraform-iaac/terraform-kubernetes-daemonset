@@ -121,7 +121,7 @@ variable "min_ready_seconds" {
 }
 variable "resources" {
   description = "(Optional) Limit resources by cpu or memory for pods"
-  default     = []
+  default     = {}
 }
 variable "liveness_probe" {
   description = "(Optional) Periodic probe of container liveness. Container will be restarted if the probe fails. Cannot be updated. "

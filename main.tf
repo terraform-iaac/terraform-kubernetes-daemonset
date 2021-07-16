@@ -184,21 +184,15 @@ resource "kubernetes_daemonset" "this" {
           }
 
           dynamic "resources" {
-            for_each = var.resources
+            for_each = length(var.resources) == 0 ? [] : [{}]
             content {
-              dynamic "requests" {
-                for_each = lookup(resources.value, "request_cpu", false) == false ? lookup(resources.value, "request_memory", false) == false ? [] : var.resources : var.resources
-                content {
-                  cpu    = lookup(resources.value, "request_cpu", null)
-                  memory = lookup(resources.value, "request_memory", null)
-                }
+              requests = {
+                cpu    = lookup(var.resources, "request_cpu", null)
+                memory = lookup(var.resources, "request_memory", null)
               }
-              dynamic "limits" {
-                for_each = lookup(resources.value, "limit_cpu", false) == false ? lookup(resources.value, "limit_memory", false) == false ? [] : var.resources : var.resources
-                content {
-                  cpu    = lookup(resources.value, "limit_cpu", null)
-                  memory = lookup(resources.value, "limit_memory", null)
-                }
+              limits = {
+                cpu    = lookup(var.resources, "limit_cpu", null)
+                memory = lookup(var.resources, "limit_memory", null)
               }
             }
           }
