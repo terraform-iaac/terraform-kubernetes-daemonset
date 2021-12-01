@@ -153,11 +153,21 @@ resource "kubernetes_daemonset" "this" {
           command           = var.command
 
           dynamic "security_context" {
-            for_each = flatten([var.security_context])
+            for_each = var.security_context
             content {
               allow_privilege_escalation = lookup(security_context.value, "allow_privilege_escalation", false)
               privileged                 = lookup(security_context.value, "privileged", false)
-              read_only_root_filesystem  = lookup(security_context.value, "read_only_root_filesystem", null)
+              read_only_root_filesystem  = lookup(security_context.value, "read_only_root_filesystem", false)
+            }
+          }
+          dynamic "security_context" {
+            for_each = flatten([var.security_context_capabilities])
+            content {
+              allow_privilege_escalation = false
+              capabilities {
+                add  = lookup(security_context.value, "add", [])
+                drop = lookup(security_context.value, "drop", [])
+              }
             }
           }
 
