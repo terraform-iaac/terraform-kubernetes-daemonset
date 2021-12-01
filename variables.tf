@@ -41,6 +41,14 @@ variable "volume_aws_disk" {
   description = "(Optional) Create volume from aws disk to pod"
   default     = []
 }
+variable "volume_claim" {
+  description = "(Optional) Represents an Persistent volume Claim resource that is attached to a kubelet's host machine and then exposed to the pod"
+  default     = []
+}
+variable "toleration" {
+  description = "(Optional) Pod node tolerations"
+  default = []
+}
 variable "volume_mount" {
   description = "(Optional) Mount path from pods to volume"
   default     = []
