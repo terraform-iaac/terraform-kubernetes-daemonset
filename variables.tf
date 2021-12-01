@@ -47,7 +47,7 @@ variable "volume_claim" {
 }
 variable "toleration" {
   description = "(Optional) Pod node tolerations"
-  default = []
+  default     = []
 }
 variable "volume_mount" {
   description = "(Optional) Mount path from pods to volume"
