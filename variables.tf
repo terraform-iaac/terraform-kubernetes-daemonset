@@ -78,7 +78,15 @@ variable "internal_port" {
   default     = []
 }
 variable "security_context" {
-  description = "(Optional) Set startup user_id, when pods start"
+  description = "(Optional) SecurityContext holds pod-level security attributes and common container settings"
+  default     = []
+}
+variable "security_context_capabilities" {
+  description = "(Optional) Security context in pod. Only capabilities."
+  default     = []
+}
+variable "security_context_container" {
+  description = "(Optional) Security context in pod."
   default     = []
 }
 
@@ -121,10 +129,6 @@ variable "restart_policy" {
   type        = string
   description = "Restart policy for all containers within the pod. One of Always, OnFailure, Never"
   default     = "Always"
-}
-variable "security_context_capabilities" {
-  description = "(Optional) Security context in pod. Only capabilities."
-  default     = []
 }
 variable "min_ready_seconds" {
   type        = number
