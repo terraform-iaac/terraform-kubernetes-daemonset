@@ -1,9 +1,10 @@
 resource "kubernetes_daemonset" "this" {
 
   metadata {
-    name      = var.name
-    namespace = var.namespace
-    labels    = local.labels
+    name        = var.name
+    namespace   = var.namespace
+    labels      = local.labels
+    annotations = var.deployment_annotations
   }
 
   spec {
@@ -15,7 +16,8 @@ resource "kubernetes_daemonset" "this" {
 
     template {
       metadata {
-        labels = local.labels
+        labels      = local.labels
+        annotations = var.template_annotations
       }
 
 

@@ -7,6 +7,16 @@ variable "namespace" {
   description = "(Optional) K8S namespace where deploy app"
   default     = "default"
 }
+variable "deployment_annotations" {
+  description = "Annotations for deployment"
+  type        = map(string)
+  default     = null
+}
+variable "template_annotations" {
+  description = "Annotations for pod (template)"
+  type        = map(string)
+  default     = null
+}
 variable "image" {
   type        = string
   description = "(Required) Docker image for app"
@@ -92,6 +102,7 @@ variable "security_context_container" {
 variable "custom_labels" {
   description = "(Optional) Add custom label to pods"
   default     = null
+  type        = map(string)
 }
 variable "args" {
   type        = list(string)
