@@ -24,6 +24,13 @@ resource "kubernetes_daemonset" "this" {
       spec {
         restart_policy = var.restart_policy
 
+        dynamic "image_pull_secrets" {
+          for_each = var.image_pull_secrets
+          content {
+            name = image_pull_secrets.value
+          }
+        }
+
         service_account_name            = var.service_account_name
         automount_service_account_token = var.service_account_token
 
