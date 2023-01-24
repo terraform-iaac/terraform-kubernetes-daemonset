@@ -164,5 +164,5 @@ variable "lifecycle_events" {
 variable "image_pull_secrets" {
   description = "(Optional) Specify list of pull secrets"
   type        = map(string)
-  default     = null
+  default     = {}
 }
