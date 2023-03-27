@@ -55,6 +55,17 @@ resource "kubernetes_daemonset" "this" {
         }
 
         dynamic "volume" {
+          for_each = var.volume_empty_dir
+          content {
+            empty_dir {
+              medium     = lookup(volume.value, "medium", null)
+              size_limit = lookup(volume.value, "size_limit", null)
+            }
+            name = volume.value.volume_name
+          }
+        }
+
+        dynamic "volume" {
           for_each = var.volume_nfs
           content {
             nfs {
